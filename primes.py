@@ -29,17 +29,17 @@ def eratosthenes(n):
     while multiple <= n/multiple:
         count = 2
         while count <= n/multiple:
-            if count*multiple in my_list:
+            if count*multiple in prime_list:
                 prime_list.remove(count*multiple)
             count = count + 1
         multiple = multiple + 1
-    #print(prime_list)
+    print(prime_list)
     return prime_list
 
 
 
 
-eratosthenes(1)
+eratosthenes(100)
 
 #def gen_eratosthenes():
 
