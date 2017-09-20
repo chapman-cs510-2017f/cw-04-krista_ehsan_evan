@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-
+import primes
 ###
 # Name: Evan A Walker, Kristaaaa, Ehsan
 # Student ID: 01932978 , kristaIDHere, EhsanIDHere
@@ -12,4 +12,6 @@
 import sys
 
 def test_primes():
-    
+    result = primes.eratosthenes(10)
+    correct = [2,3,5,7]
+    assert result == correct
