@@ -31,7 +31,7 @@ def eratosthenes(n):
                 prime_list.remove(count*multiple)    #removes count*multiple
             count = count + 1
         multiple = multiple + 1
-    #print(prime_list)   for testing only
+    #print(prime_list)   #for testing only
     return prime_list
 
 
@@ -45,12 +45,14 @@ def gen_eratosthenes():
     n=3
     yield 2
     while True:
-        count = 2               #set count to 2 because all numbers are divisible by 1, so it is not a case we need to check
-        while count < n:
+        count = 2               #set count to 2 because if count=1; all numbers are divisible by 1, so it is not a case we need to check
+        this = True
+        while count < n/2 + 1:
             if n%count == 0:    #i.e. if n is divisble by count, then n is not prime
-                count = n       #ends this loop; if n is not prime, there is no reason to continur the loop
+                count = n       #ends this loop; if n is not prime, there is no reason to continue the loop
+                this = False
             count += 1
-        if count == n:          #i.e. if count == n, then we know that the while loop was completely executed and n has no divisors except 1 and n
+        if this == True:        #i.e. if this == True, then we know that the while loop was completely executed and n has no divisors except 1 and n
             yield n             #yield n since it went through the entire loop without finding divisors
         n += 1                  #increment n to see if n+1 is prime. will continue incrimenting until another prime is found and yields it
 
@@ -67,13 +69,13 @@ def genPrimes(n):
     prime_list.append(next(p))
     while n > prime_list[len(prime_list)-1]:        #while input is less than the last term in the prime list
         prime_list.append(next(p))                  #adds next term from generator
-    if n < prime_list[len(prime_list)-1]:          #deletes last term
+    if n < prime_list[len(prime_list)-1]:           #deletes last term
         del prime_list[len(prime_list)-1]
-    #print(prime_list)  for testing only
+    #print(prime_list)  #for testing only
     return prime_list
 
 
 if __name__ == "__main__":
     import sys
     eratosthenes(int(sys.argv[1]))
-    #genPrimes(int(sys.argv[1]))
+    genPrimes(int(sys.argv[1]))
