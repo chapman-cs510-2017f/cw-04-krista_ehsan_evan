@@ -17,11 +17,11 @@ def eratosthenes(n):
     Args:
         n (int): positive integer parameter. where n>1
     Returns:
-        prime_list (list): a list of all prime numbers strictly less than n
+        prime_list (list): a list of all prime numbers less than or equal to n
     """
     assert n>1                                       #asserting n be a positive integer
     prime_list = []
-    for i in range(2,n):                             #fills prime_list with all integers  2 <= i < n
+    for i in range(2,n+1):                             #fills prime_list with all integers  2 <= i <= n
         prime_list.append(i)
     multiple = 2                                     #set to 2 because if set to 1 it will remove all elements from the list
     while multiple <= n/multiple:
@@ -31,7 +31,7 @@ def eratosthenes(n):
                 prime_list.remove(count*multiple)    #removes count*multiple
             count = count + 1
         multiple = multiple + 1
-    print(prime_list)
+    #print(prime_list)   for testing only
     return prime_list
 
 
@@ -59,7 +59,7 @@ def genPrimes(n):
     Args:
         n (int): positive integer parameter. where n>1
     Returns:
-        prime_list (list): a list of all prime numbers strictly less than n utilizing a generating fxn
+        prime_list (list): a list of all prime numbers less than or equal to n utilizing a generating fxn
     """
     assert n>1
     p = gen_eratosthenes()
@@ -67,13 +67,13 @@ def genPrimes(n):
     prime_list.append(next(p))
     while n > prime_list[len(prime_list)-1]:        #while input is less than the last term in the prime list
         prime_list.append(next(p))                  #adds next term from generator
-    if n <= prime_list[len(prime_list)-1]:          #deletes last term
+    if n < prime_list[len(prime_list)-1]:          #deletes last term
         del prime_list[len(prime_list)-1]
-    print(prime_list)
+    #print(prime_list)  for testing only
     return prime_list
 
 
 if __name__ == "__main__":
     import sys
-    #eratosthenes(int(sys.argv[1]))
-    genPrimes(int(sys.argv[1]))
+    eratosthenes(int(sys.argv[1]))
+    #genPrimes(int(sys.argv[1]))
