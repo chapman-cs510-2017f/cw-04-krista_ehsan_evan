@@ -31,7 +31,7 @@ def eratosthenes(n):
                 prime_list.remove(count*multiple)
             count = count + 1
         multiple = multiple + 1
-    #print(prime_list)
+    print(prime_list)
     return prime_list
 
 
@@ -54,7 +54,7 @@ def gen_eratosthenes():
             yield n
         n += 1
 
-def genEratosthenes(n):
+def genPrimes(n):
     """
     Args:
         n (int): positive integer parameter. where n>1
@@ -69,12 +69,11 @@ def genEratosthenes(n):
         prime_list.append(next(p))                  #adds next term from generator
     if n <= prime_list[len(prime_list)-1]:          #deletes last term
         del prime_list[len(prime_list)-1]
-    #print(prime_list)
+    print(prime_list)
     return prime_list
 
-eratosthenes(20)
-genEratosthenes(20)
 
 if __name__ == "__main__":
     import sys
     eratosthenes(int(sys.argv[1]))
+    #genPrimes(int(sys.argv[1]))
