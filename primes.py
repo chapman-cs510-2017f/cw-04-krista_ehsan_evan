@@ -19,16 +19,16 @@ def eratosthenes(n):
     Returns:
         prime_list (list): a list of all prime numbers strictly less than n
     """
-    assert n>1
+    assert n>1                                       #asserting n be a positive integer
     prime_list = []
-    for i in range(2,n):
+    for i in range(2,n):                             #fills prime_list with all integers  2 <= i < n
         prime_list.append(i)
-    multiple = 2
+    multiple = 2                                     #set to 2 because if set to 1 it will remove all elements from the list
     while multiple <= n/multiple:
-        count = 2
+        count = 2                                    #set to 2 because if set to 1 it will remove the prime itself from the list
         while count <= n/multiple:
-            if count*multiple in prime_list:
-                prime_list.remove(count*multiple)
+            if count*multiple in prime_list:         #checks if count*multiple is in list. needed because it could have already been removed
+                prime_list.remove(count*multiple)    #removes count*multiple
             count = count + 1
         multiple = multiple + 1
     print(prime_list)
@@ -45,14 +45,14 @@ def gen_eratosthenes():
     n=3
     yield 2
     while True:
-        count = 2
+        count = 2               #set count to 2 because all numbers are divisible by 1, so it is not a case we need to check
         while count < n:
-            if n%count == 0:
-                count = n
+            if n%count == 0:    #i.e. if n is divisble by count, then n is not prime
+                count = n       #ends this loop; if n is not prime, there is no reason to continur the loop
             count += 1
-        if count == n:
-            yield n
-        n += 1
+        if count == n:          #i.e. if count == n, then we know that the while loop was completely executed and n has no divisors except 1 and n
+            yield n             #yield n since it went through the entire loop without finding divisors
+        n += 1                  #increment n to see if n+1 is prime. will continue incrimenting until another prime is found and yields it
 
 def genPrimes(n):
     """
@@ -75,5 +75,5 @@ def genPrimes(n):
 
 if __name__ == "__main__":
     import sys
-    eratosthenes(int(sys.argv[1]))
-    #genPrimes(int(sys.argv[1]))
+    #eratosthenes(int(sys.argv[1]))
+    genPrimes(int(sys.argv[1]))
