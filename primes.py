@@ -17,14 +17,12 @@ def eratosthenes(n):
     Args:
         n (int): positive integer parameter. where n>1
     Returns:
-        prime_list (list): a list of all prime numbers less than n
+        prime_list (list): a list of all prime numbers strictly less than n
     """
     assert n>1
     prime_list = []
-    for i in range(n):
+    for i in range(2,n):
         prime_list.append(i)
-    prime_list.remove(0)
-    prime_list.remove(1)
     multiple = 2
     while multiple <= n/multiple:
         count = 2
@@ -33,45 +31,50 @@ def eratosthenes(n):
                 prime_list.remove(count*multiple)
             count = count + 1
         multiple = multiple + 1
-    print(prime_list)
+    #print(prime_list)
     return prime_list
 
 
-
-
-eratosthenes(100)
-
-#def gen_eratosthenes():
-
-
-
-
-
-
-
-#if __name__ == "__main__":
-#    import sys
-#    eratosthenes(int(sys.argv[1]))
-
-
-#example of generators
-'''
-def fib_gen():
-    a = 1
-    b = 0
-    hold = 0
+def gen_eratosthenes():
+    """
+    Args:
+        none
+    Yields:
+        n (int): where n is the next prime
+    """
+    n=3
+    yield 2
     while True:
-        yield a
-        hold = a
-        a = a + b
-        b = hold
+        count = 2
+        while count < n:
+            if n%count == 0:
+                count = n
+            count += 1
+        if count == n:
+            yield n
+        n += 1
 
+def genEratosthenes(n):
+    """
+    Args:
+        n (int): positive integer parameter. where n>1
+    Returns:
+        prime_list (list): a list of all prime numbers strictly less than n utilizing a generating fxn
+    """
+    assert n>1
+    p = gen_eratosthenes()
+    prime_list = []
+    prime_list.append(next(p))
+    while n > prime_list[len(prime_list)-1]:        #while input is less than the last term in the prime list
+        prime_list.append(next(p))                  #adds next term from generator
+    if n <= prime_list[len(prime_list)-1]:          #deletes last term
+        del prime_list[len(prime_list)-1]
+    #print(prime_list)
+    return prime_list
 
-def fibonacci(n):
-    my_list = []
-    g = fib_gen()
-    for i in range(n):
-        my_list.append(next(g))
-    #print(my_list)
-    return my_list
-'''
+eratosthenes(20)
+genEratosthenes(20)
+
+if __name__ == "__main__":
+    import sys
+    eratosthenes(int(sys.argv[1]))
