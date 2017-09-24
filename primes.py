@@ -35,6 +35,11 @@ def eratosthenes(n):
     return prime_list
 
 
+
+
+
+
+
 def gen_eratosthenes():
     """
     Args:
@@ -47,7 +52,7 @@ def gen_eratosthenes():
     while True:
         count = 2               #set count to 2 because if count=1; all numbers are divisible by 1, so it is not a case we need to check
         this = True
-        while count < n/2 + 1:
+        while count < n/2 + 1:  #set to n/2 + 1 so that the amount of times iterated is minimized.
             if n%count == 0:    #i.e. if n is divisble by count, then n is not prime
                 count = n       #ends this loop; if n is not prime, there is no reason to continue the loop
                 this = False
@@ -75,7 +80,112 @@ def genPrimes(n):
     return prime_list
 
 
+
+
+
+
+
+#the next 5 fxns are experimenting with other ways to generate primes
+
+def evansMod(x,n):
+    """
+    this fxn flips a modulus value from 0 to 1, or from any integer x to 0 where x != 0
+    Args:
+        n (int): positive integer parameter. where n>1
+        x (int): positive integer parameter
+    Returns:
+        1 (int): if n divides x
+        0 (int): if n does not divide x
+    """
+    if x%n == 0:
+        return 1
+    else:
+        return 0
+
+
+def evansPrimes(n):
+    """made this fxn over summer trying to find a fxn that would return perfect numbers and the kernel of the fxn would be the set of all primes,
+    however, it was computationally extensive and not easy to evaluate. might as well test its effieciency versus the other prime number generators
+    in this fxn g(x), x is a perfect number if g(x) = x (idempotent), and prime if g(x) = 1 (kernel). which is why below sums == 1, then i is prime
+    Args:
+        n (int): positive integer parameter. where n>1
+    Returns:
+        prime (list): a list of all prime numbers less than or equal to n
+    """
+    assert n>1
+    primes = []
+    for i in range(1,n+1):
+        sums = 0
+        for j in range(1,i):
+            sums += evansMod(i,j)*j
+        if sums == 1:
+            primes.append(i)
+    print(primes)
+    return primes
+
+def evansPerfectNumbers(n):
+    """made this fxn over summer trying to find a fxn that would return perfect numbers and the kernel of the fxn would be the set of all primes,
+    however, it was computationally extensive and not easy to evaluate. might as well test its effieciency versus the other prime number generators
+    in this fxn g(x), x is a perfect number if g(x) = x (idempotent), and prime if g(x) = 1 (kernel). which is why below sums == i, then i is perfect
+    Args:
+        n (int): positive integer parameter. where n>1
+    Returns:
+        perfect (list): a list of all perfect numbers less than or equal to n
+    """
+    assert n>1
+    perfect = []
+    for i in range(1,n+1):
+        sums = 0
+        for j in range(1,i):
+            sums += evansMod(i,j)*j
+        if sums == i:
+            perfect.append(i)
+    print(perfect)
+    return perfect
+
+
+
+
+
+def gen_evanPrimes():
+    """
+    Args:
+        none
+    Yields:
+        n (int): where n is the next prime
+    """
+    n=1
+    while True:
+        sums = 0
+        for j in range(1,n):
+                sums += evansMod(n,j)*j
+        if sums == 1:
+            yield n
+        n+=1
+
+def genevanPrimes(n):
+    """
+    Args:
+        n (int): positive integer parameter. where n>1
+    Returns:
+        prime_list (list): a list of all prime numbers less than or equal to n utilizing a generating fxn
+    """
+    assert n>1
+    p = gen_evanPrimes()
+    prime_list = []
+    prime_list.append(next(p))
+    while n > prime_list[len(prime_list)-1]:        #while input is less than the last term in the prime list
+        prime_list.append(next(p))                  #adds next term from generator
+    if n < prime_list[len(prime_list)-1]:           #deletes last term
+        del prime_list[len(prime_list)-1]
+    print(prime_list)  #for testing only
+    return prime_list
+
+
 if __name__ == "__main__":
     import sys
-    eratosthenes(int(sys.argv[1]))
-    genPrimes(int(sys.argv[1]))
+    #eratosthenes(int(sys.argv[1]))
+    #genPrimes(int(sys.argv[1]))
+    #evansPrimes(int(sys.argv[1]))
+    #genevanPrimes(int(sys.argv[1]))
+    evansPerfectNumbers(int(sys.argv[1]))
