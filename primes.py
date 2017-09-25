@@ -14,6 +14,11 @@ import sys
 
 def eratosthenes(n):
     """
+    this fxn is the Sieve of Eratosthenes. 
+    this algorithm generates a list of positive integers up to a given input n,
+    then removes all multiples of 2, then 3,then 4, and so on until only the numbers
+    that are divisible by 1 and itself are left in the list. and therefore the list only
+    consists of all the primes less than or equal to n
     Args:
         n (int): positive integer parameter. where n>1
     Returns:
@@ -42,6 +47,9 @@ def eratosthenes(n):
 
 def gen_eratosthenes():
     """
+    this fxn is a generator for genPrimes(int n). 
+    yields n where n is the next prime.
+    see also genPrimes(int n)
     Args:
         none
     Yields:
@@ -63,10 +71,14 @@ def gen_eratosthenes():
 
 def genPrimes(n):
     """
+    this fxn, utilizing gen_eratosthenes(), will create a list
+    of all prime numbers less than an input n.
+    see also eratosthenes(int n).
     Args:
         n (int): positive integer parameter. where n>1
     Returns:
-        prime_list (list): a list of all prime numbers less than or equal to n utilizing a generating fxn
+        prime_list (list): a list of all prime numbers 
+                           less than or equal to n utilizing a generating fxn
     """
     assert n>1
     p = gen_eratosthenes()
@@ -104,9 +116,14 @@ def evansMod(x,n):
 
 
 def evansPrimes(n):
-    """made this fxn over summer trying to find a fxn that would return perfect numbers and the kernel of the fxn would be the set of all primes,
-    however, it was computationally extensive and not easy to evaluate. might as well test its effieciency versus the other prime number generators
-    in this fxn g(x), x is a perfect number if g(x) = x (idempotent), and prime if g(x) = 1 (kernel). which is why below sums == 1, then i is prime
+    """
+    made this fxn over summer trying to find a fxn that would return perfect 
+    numbers and the kernel of the fxn would be the set of all primes,
+    however, it was computationally extensive and not easy to evaluate. 
+    might as well test its effieciency versus the other prime number generators
+    in this fxn g(x), x is a perfect number if g(x) = x (idempotent),
+    and prime if g(x) = 1 (kernel).
+    which is why below sums == 1, then i is prime
     Args:
         n (int): positive integer parameter. where n>1
     Returns:
@@ -124,10 +141,16 @@ def evansPrimes(n):
     return primes
 
 def evansPerfectNumbers(n):
-    """made this fxn over summer trying to find a fxn that would return perfect numbers and the kernel of the fxn would be the set of all primes,
-    however, it was computationally extensive and not easy to evaluate. might as well test its effieciency versus the other prime number generators
-    in this fxn g(x), x is a perfect number if g(x) = x (idempotent), and prime if g(x) = 1 (kernel). which is why below sums == i, then i is perfect
-    perfect numbers are numbers whose divisers sum is equal to the number, i.e 6=1+2+3, 1|6 & 2|6 & 3|6
+    """
+    made this fxn over summer trying to find a fxn that would return perfect numbers
+    and the kernel of the fxn would be the set of all primes,
+    however, it was computationally extensive and not easy to evaluate.
+    might as well test its effieciency versus the other prime number generators
+    in this fxn g(x), x is a perfect number if g(x) = x (idempotent), 
+    and prime if g(x) = 1 (kernel). 
+    which is why below sums == i, then i is perfect
+    perfect numbers are numbers where the sum of the divsors is equal to the number,
+    i.e 6=1+2+3, 1|6 & 2|6 & 3|6
     Args:
         n (int): positive integer parameter. where n>1
     Returns:
@@ -169,7 +192,8 @@ def genevanPrimes(n):
     Args:
         n (int): positive integer parameter. where n>1
     Returns:
-        prime_list (list): a list of all prime numbers less than or equal to n utilizing a generating fxn
+        prime_list (list): a list of all prime numbers 
+                           less than or equal to n utilizing a generating fxn
     """
     assert n>1
     p = gen_evanPrimes()
