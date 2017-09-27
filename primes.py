@@ -117,9 +117,9 @@ def evansMod(x,n):
 
 def evansPrimes(n):
     """
-    made this fxn over summer trying to find a fxn that would return perfect 
+    made this fxn over summer trying to find a fxn that would return perfect
     numbers and the kernel of the fxn would be the set of all primes,
-    however, it was computationally extensive and not easy to evaluate. 
+    however, it was computationally extensive and not easy to evaluate.
     might as well test its effieciency versus the other prime number generators
     in this fxn g(x), x is a perfect number if g(x) = x (idempotent),
     and prime if g(x) = 1 (kernel).
@@ -135,6 +135,8 @@ def evansPrimes(n):
         sums = 0
         for j in range(1,i):
             sums += evansMod(i,j)*j
+            if sums > 1:
+                break
         if sums == 1:
             primes.append(i)
     #print(primes)  #for testing only
@@ -146,11 +148,11 @@ def evansPerfectNumbers(n):
     and the kernel of the fxn would be the set of all primes,
     however, it was computationally extensive and not easy to evaluate.
     might as well test its effieciency versus the other prime number generators
-    in this fxn g(x), x is a perfect number if g(x) = x (idempotent), 
-    and prime if g(x) = 1 (kernel). 
+    in this fxn g(x), x is a perfect number if g(x) = x (idempotent),
+    and prime if g(x) = 1 (kernel).
     which is why below sums == i, then i is perfect
     perfect numbers are numbers where the sum of the divsors is equal to the number,
-    i.e 6=1+2+3, 1|6 & 2|6 & 3|6
+    i.e 6=1+2+3, because 1|6 & 2|6 & 3|6
     Args:
         n (int): positive integer parameter. where n>1
     Returns:
@@ -182,7 +184,9 @@ def gen_evanPrimes():
     while True:
         sums = 0
         for j in range(1,n):
-                sums += evansMod(n,j)*j
+            if sums > 1:
+                break
+            sums += evansMod(n,j)*j
         if sums == 1:
             yield n
         n+=1
@@ -209,7 +213,7 @@ def genevanPrimes(n):
 
 if __name__ == "__main__":
     import sys
-    #eratosthenes(int(sys.argv[1]))
-    #genPrimes(int(sys.argv[1]))
-    #evansPrimes(int(sys.argv[1]))
-    #genevanPrimes(int(sys.argv[1]))
+    eratosthenes(int(sys.argv[1]))
+    genPrimes(int(sys.argv[1]))
+    evansPrimes(int(sys.argv[1]))
+    genevanPrimes(int(sys.argv[1]))
