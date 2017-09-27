@@ -34,8 +34,8 @@ def eratosthenes(n):
         while count <= n/multiple:
             if count*multiple in prime_list:         #checks if count*multiple is in list. needed because it could have already been removed
                 prime_list.remove(count*multiple)    #removes count*multiple
-            count = count + 1
-        multiple = multiple + 1
+            count += 1
+        multiple += 1
     #print(prime_list)   #for testing only
     return prime_list
 
