@@ -22,7 +22,8 @@ Complete the following exercises, saving your solutions in the indicated files. 
 
 ## Assessment
 
-Analyze in this section what you found useful about this assignment in your own words. Include any lingering questions or comments that you may have.
+
+The class is increasingly becoming more and more difficult. We want to improve our code by learning how to write code more concisely with less loops, this will come with time. Using %timeit and %time was useful to analyze the efficency of code, withough analyzing BigO runtime theoretically. The use of a generator is still new to us and using %time to analyze our different implementations. We even created more types of implementations to find the most efficient way to generate prime numbers. They were all comparable, as expected, the generator created the fastest implementation.
 
 **CHANGEME**
 
@@ -30,9 +31,7 @@ Analyze in this section what you found useful about this assignment in your own 
 
 I pledge that all the work in this repository is my own with only the following exceptions:
 
-* Content of starter files supplied by the instructor;
-* Code borrowed from another source, documented with correct attribution in the code and summarized here.
 
 Signed,
 
-**YOURNAME**
+Evan, Ehsan, Krista
